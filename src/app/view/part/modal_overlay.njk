@@ -1,0 +1,33 @@
+<div>
+    <div 
+    id="firstModalClose" 
+    class="modal__close"
+    onclick="buttons.apply('click',this, 'modalOverlay')"
+    >
+        <i class="material-icons">reorder</i>
+    </div>
+    <div class="modal__overlay active">
+        <div class="modal">
+            <div class="modal__close">
+                <i 
+                class="material-icons"
+                onclick="buttons.apply('click', this, 'modalOverlay')"
+                >close</i>
+            </div>
+            <div class="modal__content">
+                <form class="search" action="/produtcs/search" method="GET">
+                    <input type="text" name="filter" placeholder="Buscar" {% if search.term %} value="{{search.term}}" {% endif %}>
+                    <button type="submit" class="search__button">
+                        <i class="material-icons">search</i>
+                    </button>
+                </form>
+                <ul>
+                    <li class="item-hbg">
+                        <a href="/products/create">Novo anúncio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{# /modal #}
