@@ -130,3 +130,17 @@ const PhotosUpload = {
     return photoDiv.remove();
   }
 };
+
+const imageGallery = {
+  highLight: document.querySelector('.gallery .highlight > img'),
+  preview: document.querySelectorAll('.gallery-preview img'),//pegando todos para remover o class="active"
+  setImage(event){
+    const { target } = event;
+
+    imageGallery.preview.forEach(file => file.classList.remove('active'))//remove o active de todas as fotos
+    target.classList.add('active'); // adiciona a foto apenas após o click;
+
+    imageGallery.highLight.src = target.src; // como ele é uma img posso usar o src;
+    // e trocamos pelo src que do event.target;
+  }
+}

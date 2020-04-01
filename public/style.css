@@ -48,9 +48,13 @@ body {
   min-height: 100vh;
 }
 body {
-  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
 
+  font-family: "Roboto", sans-serif;
   background-color: var(--primary-color);
+
+  -webkit-font-smoothing: antialiased;
 }
 header,
 footer {
@@ -59,13 +63,11 @@ footer {
   width: 100%;
   padding: 32px 0;
 
-  margin-bottom: 20px;
-
   background-color: black;
   color: white;
 }
 footer {
-  margin-bottom: -10vh;
+  margin-top: auto; /* como o body está com flex-direction: column, colocamos o margin-top: auto, para ele se posionar a baixo e "responsivo" quando a tela muda;  */
 }
 /* HEADER */
 header > div.container {
@@ -335,6 +337,113 @@ form .item #photos-input {
   opacity: 1;
   filter: opacity(50%);
 }
+
+/* show PRODUCTS */
+.product-single {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 24px;
+
+  padding: 32px 24px;
+  margin: 32px auto;
+
+  box-shadow: 2px 2px 2px -4px rgba(63, 63, 63, 0.9);
+  border: 1px solid #efefef;
+}
+
+/* Product-single gallery */
+.product-single .gallery {
+  width: 100%;
+}
+.product-single .gallery img {
+  width: 100%;
+}
+
+.product-single .gallery .highlight > img {
+  width: 100%;
+  height: 280px;
+
+  object-fit: none;
+  object-position: 50% 50%;
+
+  border: 1px solid #e5e5e5;
+  cursor: zoom-in;/* para dar a entender que da para dar zoom */
+}
+.product-single .gallery .gallery-preview {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 4px;
+}
+.product-single .gallery .gallery-preview img{
+  width: 100%;
+  height: 100px;
+
+  object-fit: cover;
+  opacity: 0.8;
+
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.product-single .gallery .gallery-preview img:hover,
+.product-single .gallery .gallery-preview .active {
+  opacity: 1;
+}
+
+/* Product-single info */
+.product-single .infos {
+  display: grid;
+  grid-template-rows: auto 40px 2fr 1fr; /* como a Última linha está com 1fr , ele joga ele tudo para baixo */
+}
+.product-single .infos h1 {
+  color: #333;
+  font-size: 32px;
+  line-height: 42px;
+
+  text-transform: uppercase;
+}
+.product-single .infos .published {
+  color: #777;
+  font-size: 12px;
+  line-height: 22px;
+  text-transform: uppercase;
+}
+
+/* Product-single .price-buy */
+.product-single .price-buy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 8px;
+}
+.product-single .price-buy .price {
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: bold;
+
+  color: #333;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.product-single .price-buy .price__old {
+  color: #777;
+  text-decoration: line-through;
+  font-size: 14px;
+
+  margin-left: 8px;
+  margin-right: 8px;
+}
+/* Product-single button */
+.product-single .price-buy .buy button {
+  background-color: #0578a5;
+
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
 /* CONTAINER AND BREAKPOINTS */
 .container {
   width: 100%;
@@ -343,7 +452,6 @@ form .item #photos-input {
   margin-right: auto;
   margin-left: auto;
 }
-
 /* BREAKPOINT 576px */
 @media (max-width: 750px) {
   /* HEADER */

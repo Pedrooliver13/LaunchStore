@@ -11,7 +11,7 @@ const storage = multer.diskStorage({ // onde e com qual nome ele vai ser salvo;
 
 const fileFilter = (req, file, cb) =>{ // tipo da imagem
   const isAccept = ['image/png', 'image/jpg', 'image/jpeg']
-  .find(AcceptedFormat => AcceptedFormat == file.mmimetype);
+  .find(AcceptedFormat => AcceptedFormat == file.mimetype);
   
   //find precisa de true or false para continuar;
   if(isAccept) return cb(null, true);

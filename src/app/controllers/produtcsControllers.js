@@ -1,4 +1,4 @@
-const { formatBRL } = require("../../lib/utils");
+const { formatBRL, date } = require("../../lib/utils");
 
 const Category = require("../models/category");
 const Products = require("../models/productsModels");
@@ -18,29 +18,52 @@ module.exports = {
     //lógica de validação
     const keys = Object.keys(req.body);
 
-    for (let key of keys) {
-      if (req.body[key] == "") return res.send("Please , fill all fields");
+    for (key of keys) {
+      if (req.body[key] == "") return res.send("Please,fill all fields");
     }
 
-    let results = await Products.find(req.body);
+    if(req.files.length == 0) return res.send('Please, last one image');
+
+    let results = await Products.create(req.body);
     const productId = results.rows[0].id;
 
-    if (req.files.length == 0) return res.send("please , send last one image");
-
-    const filePromise = req.files.map(file =>
+    //enviado para o banco de dados;
+    const filePromises = req.files.map(file =>
       File.create({
         ...file,
         product_id: productId
       })
     );
 
-    await Promise.all(filePromise);
-    await Products.create(req.body);
+    await Promise.all(filePromises); // para conseguir salvar , o array de imagens e tbm o map me retorna uma promise;(contem muitas imagens, por isso mandamos ele esperar usando as promesas);
+   
 
-    return res.redirect("products/create");
+    return res.redirect("/");
   },
-  async show(req, res){
-    return res.render('products/show');
+  async show(req, res) {
+    let results = await Products.find(req.params.id);
+    const product = results.rows[0];
+
+    if (!product) return res.send("Product is not found");
+
+    const { day, month, hour, minutes } = date(product.updated_at);
+
+    product.published = {
+      date: `${day}/${month}`,
+      hour: `${hour}h${minutes}`
+    };
+
+    product.price = formatBRL(product.price);
+    product.oldPrice = formatBRL(product.old_price); // chamamos ele de oldPrice
+
+    //getImages
+    results = await Products.files(product.id);
+    const files = results.rows.map(file => ({
+      ...file,
+      src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+    }));
+
+    return res.render("products/show", { product, files });
   },
   async edit(req, res) {
     let results = await Products.find(req.params.id);
@@ -74,7 +97,8 @@ module.exports = {
     const keys = Object.keys(req.body);
 
     for (let key of keys) {
-      if (req.body[key] == "" && key != "removed_files") return res.send("Please ,  fill all fields");
+      if (req.body[key] == "" && key != "removed_files")
+        return res.send("Please ,  fill all fields");
     }
 
     if (req.body.old_price != req.body.price) {
@@ -83,8 +107,8 @@ module.exports = {
       req.body.old_price = oldProduct.rows[0].price;
     }
 
+    // removendo virgula para deletar apenas o id
     if (req.body.removed_files) {
-      // removendo virgula
       const removedFiles = req.body.removed_files.split(","); // [1, 2, 3,]
       const lastIndex = removedFiles.length - 1;
 
@@ -96,7 +120,7 @@ module.exports = {
 
     //caso queira adicionar mais imagens;
     if (req.files.length != 0) {
-      const newFilesPromise = req.files.map(file => ({
+      const newFilesPromise = req.files.map(file => File.create({
         ...file,
         product_id: req.body.id
       }));
@@ -105,6 +129,8 @@ module.exports = {
     }
 
     await Products.update(req.body);
+
+    return res.redirect(`/products/${req.body.id}`);
   },
   async delete(req, res) {
     await Products.delete(req.body.id);
