@@ -1,5 +1,5 @@
+// mask , covertendo para moeda
 const mask = {
-  // mask , covertendo para moeda
   apply(input, func) {
     setTimeout(() => {
       input.value = mask[func](input.value);
@@ -39,8 +39,8 @@ const buttons = {
     }
   }
 };
+// lógica de envio de imagens;
 const PhotosUpload = {
-  // lógica de envio de imagens;
   input: "",
   UploadLimit: 6,
   files: [],
@@ -120,7 +120,9 @@ const PhotosUpload = {
     const photoDiv = event.target.parentNode; // <div class="photo">
 
     if (photoDiv.id) {
-      const removedFiles = document.querySelector('input[name="removed_files"]');
+      const removedFiles = document.querySelector(
+        'input[name="removed_files"]'
+      );
 
       if (removedFiles) {
         removedFiles.value += `${photo.id},`;
@@ -130,17 +132,35 @@ const PhotosUpload = {
     return photoDiv.remove();
   }
 };
-
+//funcionalidade da galeria;
 const imageGallery = {
-  highLight: document.querySelector('.gallery .highlight > img'),
-  preview: document.querySelectorAll('.gallery-preview img'),//pegando todos para remover o class="active"
-  setImage(event){
+  highLight: document.querySelector(".gallery .highlight > img"),
+  preview: document.querySelectorAll(".gallery-preview img"), //pegando todos para remover o class="active"
+  setImage(event) {
     const { target } = event;
 
-    imageGallery.preview.forEach(file => file.classList.remove('active'))//remove o active de todas as fotos
-    target.classList.add('active'); // adiciona a foto apenas após o click;
+    imageGallery.preview.forEach(file => file.classList.remove("active")); //remove o active de todas as fotos
+    target.classList.add("active"); // adiciona a foto apenas após o click;
 
-    imageGallery.highLight.src = target.src; // como ele é uma img posso usar o src;
-    // e trocamos pelo src que do event.target;
+    imageGallery.highLight.src = target.src;// como ele é uma img posso usar o src;// e trocamos pelo src que do event.target;
+    LightBox.image.src = target.src;
   }
-}
+};
+
+const LightBox = {
+  target: document.querySelector(".lightbox-target"),
+  image: document.querySelector(".lightbox-target > img"),
+  closeButton: document.querySelector(".lightbox-target .lightbox-close"),
+  open() {
+    LightBox.target.style.opacity = 1;
+    LightBox.target.style.top = 0;
+    LightBox.target.style.bottom = 0;
+    LightBox.closeButton.style.top = 0;
+  },
+  close() {
+    LightBox.target.style.opacity = 0;
+    LightBox.target.style.top = "100%";
+    LightBox.target.style.bottom = "initial";
+    LightBox.closeButton.style.top = "-80px";
+  }
+};

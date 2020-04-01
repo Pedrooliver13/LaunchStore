@@ -1,33 +1,42 @@
 {% extends 'layout.njk' %}
 
+{% block head %}
+  <link rel="stylesheet" href="./show/style.css">
+{% endblock head %}
+
 {% block content %}
   <div class="product-single container">
 
     <div class="gallery">
 
-      <div class="highlight">{# FOTO DE DESTAQUE; #}
+      <div class="highlight">
+        {# FOTO DE DESTAQUE; #}
         {% if not files %}
           <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO" alt="produto sem foto">
         {% else %}
-          <img src="{{files[0].src}}" alt="{{file[0].name}}">
+          <img src="{{files[0].src}}" alt="{{file[0].name}}" onclick="LightBox.open()">
         {% endif %}
-      </div>
-      <div class="gallery-preview">
 
-        {% for images in files %}{# loop.index = 1 ao todo; loop.index0 = 0(zero ao todo) #}
-          <img 
-            src="{{ images.src }}" 
-            alt="{{ images.name }}"
-            {% if loop.index0 == 0 %}
-              class="active"
-            {% endif %}
-            onclick="imageGallery.setImage(event)"
+        <div class="lightbox-target">
+          <img src="{{ files[0].src }}" alt="{{files[0].name}}">
+          <a 
+            class="lightbox-close"
+            onclick="LightBox.close()"
           >
-        {% endfor %}
-
+            <i class="material-icons">close</i>
+          </a>
+        </div>
       </div>
-      
+
+      <div class="gallery-preview">
+        {% for images in files %}
+          {# loop.index = 1 ao todo; loop.index0 = 0(zero ao todo) #}
+          <img src="{{ images.src }}" alt="{{ images.name }}" {% if loop.index0 == 0 %} class="active" {% endif %} onclick="imageGallery.setImage(event)">
+        {% endfor %}
+      </div>
+
     </div>
+
     <div class="infos">
       <h1>{{product.name}}</h1>
 

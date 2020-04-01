@@ -1,6 +1,6 @@
 const express = require("express");
 const routes = express.Router();
-const multer = require("./src/app/middlewares/multer"); // responsável por dar um limite de fotos
+const multer = require("./src/app/middlewares/multer"); // responsável por dar um limite de fotos e enviar para pasta images;
 
 const productsControllers = require("./src/app/controllers/produtcsControllers");
 

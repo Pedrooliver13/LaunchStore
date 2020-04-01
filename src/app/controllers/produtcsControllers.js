@@ -10,7 +10,7 @@ module.exports = {
       .then(results => {
         const category = results.rows;
 
-        return res.render("products/create", { category });
+        return res.render('products/create', { category });
       })
       .catch(err => new Error(err));
   },
@@ -24,7 +24,7 @@ module.exports = {
 
     if(req.files.length == 0) return res.send('Please, last one image');
 
-    let results = await Products.create(req.body);
+    let results = await Products.create(req.body); // cria antes , para depois pegar o id;
     const productId = results.rows[0].id;
 
     //enviado para o banco de dados;
