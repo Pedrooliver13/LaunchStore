@@ -508,18 +508,18 @@ const LightBox = {
   // Dados de entrada, processamento , e Saída;
   target: document.querySelector(".highlight .lightbox"),
   image: document.querySelector('.lightbox-target img'),
-  closeButton: document.querySelector(".lightbox-target .close-lightbox"),<br>
+  closeButton: document.querySelector(".lightbox-target .close-lightbox"),
   open() {
-    LightBox.target.style.opacity = 1;<br>
-    LightBox.target.style.top = 0;<br>
-    LightBox.target.style.bottom = 0;<br>
-    LightBox.closeButton.style.top = 0;<br>
-  },<br>
+    LightBox.target.style.opacity = 1;
+    LightBox.target.style.top = 0;
+    LightBox.target.style.bottom = 0;
+    LightBox.closeButton.style.top = 0;
+  },
   close() {
-    LightBox.target.style.opacity = 0;<br>
-    LightBox.target.style.top = "-100%";<br>
-    LightBox.target.style.bottom = "initial";<br>
-    LightBox.closeButton.style.top = "-80px";<br>
-  },<br>
+    LightBox.target.style.opacity = 0;
+    LightBox.target.style.top = "-100%";
+    LightBox.target.style.bottom = "initial";
+    LightBox.closeButton.style.top = "-80px";
+  },
 };
 `
