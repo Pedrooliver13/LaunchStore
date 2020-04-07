@@ -11,11 +11,11 @@
 
 ` HTML
 
-<div class="menu-toggle">
-  <div class="one"></div>
-  <div class="two"></div>
-  <div class="three"></div>
-</div>
+< div class="menu-toggle">
+  < div class="one"></ div>
+  < div class="two"></ div>
+  < div class="three"></ div>
+< /div>
 
 `
 
@@ -346,7 +346,7 @@ module.exports = multer({
 
 ## PARA TUDO ISSO FUNCIONAR ADICIONE ISSO AO FORMS
 ` 
-<form action="/admin?_method=PUT" method="POST" ectype="multipart/form-data">
+< form action="/admin?_method=PUT" method="POST" ectype="multipart/form-data">
 `
 <p>
   o ectype, vai aceitar o envio das imagens 
@@ -440,12 +440,12 @@ filtraremos o array até o seu ultimo item (length - 1)</p>
  body, html {
    min-height: 100vh;
  }
-
+<br>
  body {
    display: flex;
    flex-direction: column;
  }
-
+<br>
  footer {
    margin-top: auto;
  }
@@ -508,18 +508,18 @@ const LightBox = {
   // Dados de entrada, processamento , e Saída;
   target: document.querySelector(".highlight .lightbox"),
   image: document.querySelector('.lightbox-target img'),
-  closeButton: document.querySelector(".lightbox-target .close-lightbox"),
+  closeButton: document.querySelector(".lightbox-target .close-lightbox"),<br>
   open() {
-    LightBox.target.style.opacity = 1;
-    LightBox.target.style.top = 0;
-    LightBox.target.style.bottom = 0;
-    LightBox.closeButton.style.top = 0;
-  },
+    LightBox.target.style.opacity = 1;<br>
+    LightBox.target.style.top = 0;<br>
+    LightBox.target.style.bottom = 0;<br>
+    LightBox.closeButton.style.top = 0;<br>
+  },<br>
   close() {
-    LightBox.target.style.opacity = 0;
-    LightBox.target.style.top = "-100%";
-    LightBox.target.style.bottom = "initial";
-    LightBox.closeButton.style.top = "-80px";
-  },
+    LightBox.target.style.opacity = 0;<br>
+    LightBox.target.style.top = "-100%";<br>
+    LightBox.target.style.bottom = "initial";<br>
+    LightBox.closeButton.style.top = "-80px";<br>
+  },<br>
 };
 `
