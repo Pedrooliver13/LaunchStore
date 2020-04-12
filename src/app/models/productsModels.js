@@ -1,6 +1,13 @@
 const db = require("../../config/db");
 
 module.exports = {
+  all(){
+    return db.query(`
+    SELECT * FROM products
+    ORDER BY updated_at DESC
+    `);
+
+  },
   create(data) {
     const query = `
         INSERT INTO products (
@@ -63,8 +70,7 @@ module.exports = {
         `;
 
     data.price = data.price.replace(/\D/g, "");
-    data.old_price = data.old_price.replace(/\D/g, "");
-
+    
     const values = [
       data.category_id,
       data.user_id || 1,

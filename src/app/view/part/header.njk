@@ -1,39 +1,48 @@
 <header>
-    <div class="container">
-        <a href="/">
-            <div class="logo">
-                <h1>Lauchstore</h1>
-                <h2>COMPRA E VENDA</h2>
-            </div>
-        </a>
+  <div class="container">
+    <a href="/">
+      <div class="logo">
+        <h1>Lauchstore</h1>
+        <h2>COMPRA E VENDA</h2>
+      </div>
+    </a>
 
-        <form class="search" action="/produtcs/search" method="GET">
-            <input type="text" name="filter" placeholder="Buscar por produtos" {% if search.term %} value="{{search.term}}" {% endif %}>
-            <button type="submit" class="search__button">
-                <i class="material-icons">search</i>
-            </button>
-        </form>
+    <form class="search" action="/products/search" method="GET">
+      <input type="text" name="filter" placeholder="Buscar por produtos" {% if search.term %} value="{{search.term}}" {% endif %}>
+      <button type="submit" class="search__button">
+        <i class="material-icons">search</i>
+      </button>
+    </form>
 
-        <nav class="primary">
-            <ul>
-                <li>
-                    <a href="/products/create">
-                        <i class="material-icons icon__add">add</i>
-                        Novo anúncio
-                    </a>
-                </li>
-                <li>
-                    <a href="/">
-                        <i class="material-icons">account_circle</i>
-                        Acessar conta
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        
-        {% include "part/modal_overlay.njk" %}
+    <div class="menu-section">
 
+      <div class="menu-toggle">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+      </div>
+
+      <nav class="primary">
+        <ul>
+
+          <li>
+            <a href="/products/create">
+              <i class="material-icons icon__add">add</i>
+              Novo anúncio
+            </a>
+          </li>
+          <li>
+            <a href="/">
+              <i class="material-icons">account_circle</i>
+              Acessar conta
+            </a>
+          </li>
+
+        </ul>
+      </nav>
     </div>
-    {# /CONTAINER #}
+
+  </div>
+  {# /CONTAINER #}
 
 </header>

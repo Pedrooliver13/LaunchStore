@@ -1,26 +1,11 @@
 {% extends "layout.njk" %}
 
+{% import "part/section-products.njk" as section %} 
+{# importamos o section-products , e para usar ele no front , apelidamos de section  #}
+
 {% block content %}
 
-  <section class="container">
-    <h3>Últimos Produtos</h3>
-
-    <div class="items">
-
-      {% for product in products %}
-        <div class="product">
-          <div class="image" 
-          style="background: url({{ product.img if product.img else '//placehold.it/500x500?text=Produto sem Imagem' }})"
-          ></div>
-
-          <p>{{ product.price }}</p>
-          <h4>{{ product.name }}</h4>
-
-          <a href="/products">Ver mais</a>
-        </div>
-      {% endfor %}
-
-    </div>
-  </section>
+  {# veja como ficou muito mais legivel #}
+  {{ section.products("Últimos Produtos", "container", products ) }} 
 
 {% endblock content %}

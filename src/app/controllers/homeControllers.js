@@ -1,14 +1,49 @@
-const { formatBRL, date } = require('../../lib/utils');
+const { formatBRL } = require("../../lib/utils");
 
-const Product = require('../models/productsModels');
-const Category = require('../models/category');
-const File = require('../models/file');
+const Product = require("../models/productsModels");
 
 module.exports = {
-  async index(req, res){
-    let results = await Product.find(req.params.id);
-    const product = results.rows;
+  async index(req, res) {
 
-    if(!product) return res.send('Product not found');
-  }
-}
+    try {
+      let results = await Product.all();
+      const products = results.rows;
+
+      if (!products) return res.send("Products not found");
+
+  
+      async function getImage(productId) {
+        let results = await Product.files(productId);
+        const files = results.rows.map(
+          (file) =>
+            `${req.protocol}://${req.headers.host}${file.path.replace(
+              "public",
+              ""
+            )}`
+        );
+
+        return files[0]; // aqui me entereça apenas a prinmeira posição de cada um dos products;
+      }
+
+      // passando cada um dos products com a ferramenta map , e formatando seus items
+      // pegamos todos os produtos. ele me retorna um array e uma promise.
+      const productsPromise = products.map(async (product) => {
+      // chamando a função, e passando o product como parâmetro
+        product.img = await getImage(product.id); 
+        product.oldPrice = formatBRL(product.old_price);
+        product.price = formatBRL(product.price);
+
+        return product;
+      })
+      .filter((product, index) => (index > 2 ? false : true)); //  operadores ternários funciona como um if;
+      // to usando o filter pq eu quero apenas três products
+
+      const lastAdded = await Promise.all(productsPromise); // como o map me retorna uma promise , temos que receber ele com o Promise.all();
+
+      return res.render("home/index", { products: lastAdded });
+
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+};

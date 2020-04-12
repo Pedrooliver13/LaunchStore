@@ -398,7 +398,19 @@ como usar results de uma Promise.all() ?
   // aqui vou conseguir usar tranquilamente o results da promise;
   // Lembrando que temos que usar os rows, para ele usar id de todos(pq o map executa para cada um dos items do array) 
 `
+# COMO ATULIZAR NOVAS IMAGENS
+<p>As imagens antigas estão "guardada" em outro lugar não no input[name="photos"], portanto , quando você enviar ele sem alteração, o req.files vai estar vazio  </p>
 
+<p>Por esse motivo fizemos uma condição para quando o req.files for diferente de zero ele executar o código</p>
+`
+  if(req.files.length != 0){
+    const newFilesPromise = req.files.map(files => File.create(file));
+
+    await Promise.all(newFilesPromise);
+  }
+`
+
+<i>*Perceba que criamos um novo file no banco de dados.</i>
 
 # Try/Catch.
 ele vai ser reponsavel por tentar executar alguma coisa,
