@@ -1,4 +1,4 @@
-// mask , covertendo para moeda
+// mask
 const mask = {
   apply(input, func) {
     setTimeout(() => {
@@ -12,8 +12,43 @@ const mask = {
       style: "currency",
       currency: "BRL"
     }).format(value / 100);
+  },
+  cpfCnpj(value){
+   value = value.replace(/\D/g , "");
+
+   if(value.length > 14) // dando limite de digitos;
+    value = value.slice(0, -1); // remove o último adicionado;
+
+   if(value.length > 11){
+    // cnpj --> 12.123.123/1234-11;
+
+    // o replace segue uma ordem;
+    value = value.replace(/(\d{2})(\d)/ , "$1.$2"); // 12.12345678;
+    value = value.replace(/(\d{3})(\d)/ , "$1.$2"); // 12.123.45678;
+    value = value.replace(/(\d{3})(\d)/ , "$1/$2"); // 12.123.456/123456;
+    value = value.replace(/(\d{4})(\d)/ , "$1-$2"); // 12.123.456/1234-56;
+
+   }else {
+    // cpf --> 123.123.123-12;
+
+    value = value.replace(/(\d{3})(\d)/ , "$1.$2");
+    value = value.replace(/(\d{3})(\d)/ , "$1.$2");
+    value = value.replace(/(\d{3})(\d)/ , "$1-$2");
+   };
+   
+   return value;
+  },
+  cep(value){
+    // cep --> 84990-000
+    if(value.length > 8)
+      value = value.slice(0, -1);
+
+    value = value.replace(/(\d{5})(\d)/, "$1-$2");
+
+    return value;
   }
 };
+
 const buttons = {
   // funcionalidades do botoes;
   apply(Dom, button, func) {

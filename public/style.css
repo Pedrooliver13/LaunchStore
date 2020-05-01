@@ -199,7 +199,9 @@ form .item > div:nth-child(1) {
 
   margin-bottom: 8px;
 }
+form .item .input input,
 form .item input[type="text"],
+form .item input[type="email"],
 form .item input[type="number"],
 form .item textarea,
 form .item select {
@@ -502,8 +504,7 @@ form .item #photos-input {
 }
 .shop .items  {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  
+  grid-template-columns:repeat(3, 1fr);
   grid-gap: 20px;
 
   margin: 10px auto;
@@ -519,17 +520,19 @@ form .item #photos-input {
 .shop .product .button {
   margin-bottom: 0;
 }
-.shop .product .image {
-  padding-top: 56.25%;
+.shop .product .image img{
+  width: 100%;
+  height: 150px;
 
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  border-radius: 3.5px;
+
+  object-fit: cover;
 }
 .shop .items h4 {
   margin: 8px 0;
   
-  font-weight: 300;
+  font-weight: 700;
+  text-transform: uppercase;
   font-size: 1em;
   color: #999;
 }

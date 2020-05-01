@@ -4,46 +4,34 @@ const Product = require("../models/productsModels");
 
 module.exports = {
   async index(req, res) {
-
     try {
+
       let results = await Product.all();
       const products = results.rows;
 
-      if (!products) return res.send("Products not found");
-
-  
       async function getImage(productId) {
+        // vamos pegar uma imagem por produto;
         let results = await Product.files(productId);
-        const files = results.rows.map(
-          (file) =>
-            `${req.protocol}://${req.headers.host}${file.path.replace(
-              "public",
-              ""
-            )}`
-        );
+        const files = results.rows.map((file) =>
+        `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`);
 
-        return files[0]; // aqui me entereça apenas a prinmeira posição de cada um dos products;
+        return files[0];
       }
 
-      // passando cada um dos products com a ferramenta map , e formatando seus items
-      // pegamos todos os produtos. ele me retorna um array e uma promise.
-      const productsPromise = products.map(async (product) => {
-      // chamando a função, e passando o product como parâmetro
-        product.img = await getImage(product.id); 
-        product.oldPrice = formatBRL(product.old_price);
+      let productPromise = products.map(async product => {
+        product.img =  await getImage(product.id);
         product.price = formatBRL(product.price);
+        product.oldPrice = formatBRL(product.old_price);
 
         return product;
-      })
-      .filter((product, index) => (index > 2 ? false : true)); //  operadores ternários funciona como um if;
-      // to usando o filter pq eu quero apenas três products
-
-      const lastAdded = await Promise.all(productsPromise); // como o map me retorna uma promise , temos que receber ele com o Promise.all();
+      }).filter((product, index) => index > 2 ? false : true );
+      
+      let lastAdded = await Promise.all(productPromise);
 
       return res.render("home/index", { products: lastAdded });
 
-    } catch (err) {
-      throw new Error(err);
+    } catch (error) {
+      console.error(error);
     }
   },
 };

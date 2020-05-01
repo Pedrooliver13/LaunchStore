@@ -24,6 +24,41 @@ CREATE TABLE "files" (
   "product_id" int
 );
 
+CREATE TABLE "user" (
+  "id" SERIAL PRIMARY KEY,
+  "category_id" int,
+  "user_id" int,
+  "name" text NOT NULL,
+  "description" text NOT NULL,
+  "old_price" int,
+  "price" int NOT NULL,
+  "quantity" int DEFAULT 0,
+  "status" int DEFAULT 1,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
+);
+
+
 ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
 
 ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+
+--procedure auto update; 
+CREATE FUNCTION trigger_set_timestap()
+RETURNS TRIGGER AS $$
+  BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+  END;
+$$ LANGUAGE plpgsql;
+
+--triggers
+CREATE TRIGGER set_timestap
+BEFORE UPDATE ON user
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestap();
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON products
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
