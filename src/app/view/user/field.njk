@@ -20,6 +20,7 @@
       name="email"
       placeholder="Escreva seu e-mail" 
       value="{{ user.email }}"
+      onblur="validate.apply(this, 'isEmail')"
     >
   </div>
 </div>

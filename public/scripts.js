@@ -49,6 +49,38 @@ const mask = {
   }
 };
 
+const validate = {
+  apply(input, func){ 
+    // onblur --> eventListener -->quando sai do campo ele executa;
+
+    // results --> recebe --> resultado da função;
+    let results = validate[func](input.value); 
+    input.value = results.value;
+
+    if(results.error)
+      alert('Errou!');
+  },
+  isEmail(value){
+    let error = null;
+    const mailFormat = /^\w+([\.-]?)/;
+    
+    return {
+      error,
+      value
+    };
+    
+  }
+}
+
+// sinal de ^ significa "começar por..." 
+// \w+ --> significa que vai aceitar 1 ou mais caracteres; 
+// () -->  pode ser usada --> placeholder, e para agrupar código;
+// [] --> para que serve? --> colocar caracteres que vão ser aceito; 
+// [\.-] --> barra na frente do ponto diz que é um ponto não um valor (o ponto é um valor na expressão regular);
+// ([\.-] ?) --> o ponto de interogação diz que é facultativo;
+
+
+
 const buttons = {
   // funcionalidades do botoes;
   apply(Dom, button, func) {
