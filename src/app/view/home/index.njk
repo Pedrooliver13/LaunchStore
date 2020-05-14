@@ -1,11 +1,11 @@
 {% extends "layout.njk" %}
 
-{% import "part/section-products.njk" as section %} 
+{% import "part/section-products.njk" as section %}
 {# importamos o section-products , e para usar ele no front , apelidamos de section  #}
 
 {% block content %}
 
   {# veja como ficou muito mais legivel #}
-  {{ section.products("Últimos Produtos", "container", products ) }} 
+  {{ section.products("Últimos Produtos", "container", products ) }}
 
 {% endblock content %}

@@ -7,6 +7,7 @@
       name="name"
       placeholder="Coloque seu nome completo" 
       value="{{ user.name }}"
+      required
     >
   </div>
 </div>
@@ -31,6 +32,7 @@
   <div class="input">
     <input 
       type="password" 
+      name="password"
       placeholder="Escreva sua senha" 
       value="{{ user.password }}"
     >
@@ -47,7 +49,7 @@
         type="password" 
         name="passwordRepeat"
         placeholder="Repita sua senha" 
-        value="{{ user.password }}"
+        value="{{ user.passwordRepeat }}"
       >
     </div>
   </div>
@@ -64,6 +66,7 @@
       placeholder="Digite seu documento"
       value="{{ user.cpf_cnpj }}"
       onkeydown="mask.apply(this , 'cpfCnpj')"
+      onblur="validate.apply(this, 'isCpfCnpj')"
     >
   </div>
 </div>
@@ -75,9 +78,10 @@
     <input 
     type="text"
     name="cep"
-    placeholder="999999-99"
+    placeholder="99999-999"
     value="{{ user.cep }}"
     onkeydown="mask.apply(this, 'cep')"
+    onblur="validate.apply(this, 'isCep')"
     >
   </div>
 </div>

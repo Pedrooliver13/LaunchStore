@@ -4,14 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Launchstore</title>
-        {# MATERIAL ICONS #}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        {# CLASSE PAI #}
-        <link rel="stylesheet" href="/style.css">
-        {# MOBILE SÓ TREINAMENTO #}
-        <link rel="stylesheet" href="/mobile.css">
+        
+        {% include "part/styles.njk" %}
     </head>
     <body>
+        {% include "part/messages.njk" %}
+    
         {% include "part/header.njk" %}
 
         {% block content %}{% endblock content %}

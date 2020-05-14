@@ -3,10 +3,11 @@ const routes = express.Router();
 
 // const sessionControllers = require('../app/controllers/sessionControllers');
 const userControllers = require('../app/controllers/userControllers');
+const validator = require('../app/validators/user'); // ? middleware para passar as validações;
 
 // sessionControllers Responsável por: --> login, logout -- forgot password etc;
 
-// // login/logout
+// login/logout
 // routes.get('/login', sessionControllers.loginForm);
 // routes.post('/login', sessionControllers.login);
 // routes.post('/logout', sessionControllers.logout);
@@ -21,9 +22,9 @@ const userControllers = require('../app/controllers/userControllers');
 
 
 routes.get('/register', userControllers.registerForm);
-// routes.post('/register', UserControllers.post);
+routes.post('/register', validator.post,  userControllers.post);
 
-// routes.get('/', userControllers.show);
+routes.get('/', userControllers.show);
 // routes.put('/', userControllers.update);
 // routes.delete('/', userControllers.delete);
 
