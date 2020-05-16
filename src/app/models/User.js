@@ -1,11 +1,10 @@
 const db = require("../../config/db");
-const { hash } = require("bcryptjs");
+const { hash } = require('bcryptjs');
 
 module.exports = {
   async create(data) {
-   try {
-
-    const query = `
+    try {
+      const query = `
     INSERT INTO users (
       name,
       email,
@@ -16,26 +15,26 @@ module.exports = {
     ) VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING id
     `;
-        
-    // npm install bcryptjs --> {hash} --> o que faz? --> criptografa a senha  // ! obs: ela é uma promise;
-    const passwordHash = await hash(data.password, 8); // ? (senha ,  força da senha)
 
-    const values = [
-      data.name,
-      data.email,
-      passwordHash,
-      data.cpf_cnpj.replace(/\D/g, ""),
-      data.cep.replace(/\D/g, ""),
-      data.address
-    ];
+      // npm install bcryptjs --> {hash} --> o que faz? --> criptografa a senha  // ! obs: ela é uma promise;
+      const passwordHash = await hash(data.password, 8); // * hash(senha, força da senha);
 
-    const results = await db.query(query, values);
-    return results.rows[0].id;
+      const values = [
+        data.name,
+        data.email,
+        passwordHash,
+        data.cpf_cnpj.replace(/\D/g, ""),
+        data.cep.replace(/\D/g, ""),
+        data.address,
+      ];
 
-   } catch (err) {
-     console.error(err);
-     
-   }
+      const results = await db.query(query, values);
+      return results.rows[0].id;
+
+    } catch (err) {
+      console.error(err);
+      
+    }
   },
   async findOne(filters) {
     let query = "SELECT * FROM users";
@@ -46,6 +45,7 @@ module.exports = {
       Object.keys(filters[key]).map((field) => {
         query = `${query} ${field} = '${filters[key][field]}'`;
       });
+
     });
 
     const results = await db.query(query);

@@ -10,6 +10,8 @@ module.exports = {
   async post(req, res) {
     const userId = await User.create(req.body);
 
+    req.session.userId = userId; // ? passo o userId para o sessio que manda para o banco de dados;
+
     return res.redirect("/user");
   },
 };
