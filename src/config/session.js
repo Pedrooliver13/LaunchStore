@@ -11,11 +11,11 @@ module.exports = session({ // ? configurando a session;
   resave: false,
   saveUninitialized: false,
   cookie: {
-    // * 30 dias tem 24 horas cada hora tem 60 minutos e 60 segundos e 100 milisegundos;
+    
     maxAge: 30 * 24 * 60 * 60 * 1000 
   }
 });
-
+// * 30 dias tem 24 horas cada hora tem 60 minutos e 60 segundos e 100 milisegundos;
 // ! --> passo o banco de dados. --> cria as seção e passa para o banco de dados;
 // ! --> passamos uma chave secreta;
 

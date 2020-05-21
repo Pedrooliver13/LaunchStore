@@ -11,13 +11,16 @@
             <div class="header">
                 <h3>Editar Produto</h3>
             </div>
+            
             <div class="fields">
                 <input type="hidden" name="id" value="{{ product.id }}">
                 {% include "./field.njk" %}
             </div>
+
             <button class="button" type="submit">
                 Salvar
             </button>
+
             <button form="formDelete" class="button" type="submit" onclick="buttons.apply('submit', this, 'wantDelete')">
                 deletar
             </button>

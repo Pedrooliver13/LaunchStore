@@ -24,8 +24,8 @@ const validator = require('../app/validators/user'); // ? middleware para passar
 routes.get('/register', userControllers.registerForm);
 routes.post('/register', validator.post,  userControllers.post);
 
-routes.get('/', userControllers.show);
-// routes.put('/', userControllers.update);
+routes.get('/', validator.show,userControllers.show);
+routes.put('/', validator.update, userControllers.put);
 // routes.delete('/', userControllers.delete);
 
 module.exports = routes; 

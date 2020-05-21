@@ -1,0 +1,30 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+  <section class="container">
+
+    <form action="/user?_method=PUT" method="POST">
+      <div class="header">
+        <h3>Editar Produto</h3>
+      </div>
+
+      <div class="fields">
+        <input type="hidden" name="id" value="{{ user.id }}">
+        {% include "./field.njk" %}
+      </div>
+
+      <button class="button" type="submit">
+        Salvar
+      </button>
+
+      <button form="formDelete" class="button" type="submit" onclick="buttons.apply('submit', this, 'wantDelete')">
+        deletar
+      </button>
+    </form>
+
+    <form id="formDelete" method="POST" action="/user?_method=DELETE">
+      <input type="hidden" name="id" value="{{ user.id }}">
+    </form>
+  </section>
+
+{% endblock content %}

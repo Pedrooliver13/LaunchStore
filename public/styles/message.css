@@ -28,3 +28,7 @@
   background-color: #ce3221;
   color: white;
 }
+.message.success {
+  background-color: #11c011;
+  color: white;
+}
