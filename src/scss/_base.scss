@@ -1,0 +1,66 @@
+$primary-color: #fd951f;
+$secondary-color: #f9f9f9;
+
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box !important;
+
+  text-decoration: none;
+  list-style: none;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CONTAINER AND BREAKPOINTS */
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+:root {
+  --primary-color: #f9f9f9;
+  --secondary-color: #fd951f;
+}
+.hide {
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 250ms;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+body {
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Roboto", sans-serif;
+  background-color: var(--primary-color);
+
+  -webkit-font-smoothing: antialiased;
+}
+header,
+footer {
+  text-align: center;
+
+  width: 100%;
+  padding: 32px 0;
+
+  background-color: black;
+  color: white;
+}
+footer {
+  margin-top: auto; /* como o body está com flex-direction: column, colocamos o margin-top: auto, para ele se posionar a baixo e "responsivo" quando a tela muda;  */
+}

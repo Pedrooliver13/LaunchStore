@@ -13,10 +13,8 @@
       {% for product in products %}
 
         <div class="product">
-          <div 
-            class="image" 
-          >
-          <img src="{{ product.img if product.img else '//placehold.it/500x500' }}" alt="">
+          <div class="image">
+            <img src="{{ product.img if product.img else '//placehold.it/500x500' }}" alt="">
           </div>
 
           <h4>{{ product.name }}</h4>

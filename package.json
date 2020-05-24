@@ -7,7 +7,7 @@
     "start": "npm-run-all -p nodemon build:sass browser-sync",
     "nodemon": "nodemon src/server.js",
     "browser-sync": "browser-sync start --proxy http://localhost:3333 --files 'public, src/app/view'",
-    "build:sass": "sass --watch ./src/scss/main.scss:public/styles/main.css"
+    "build:sass": "sass --watch ./src/scss/main.scss:public/styles/main.css --style=compressed"
   },
   "keywords": [],
   "author": "",

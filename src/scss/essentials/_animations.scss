@@ -1,0 +1,9 @@
+// message;
+@keyframes hiddemessage {
+  to {
+    position: absolute;
+
+    top: -50px;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,8 @@
+.message {
+  &.error {
+    @include text-effect(error);
+  }
+  &.success {
+    @include text-effect(success);
+  }
+}

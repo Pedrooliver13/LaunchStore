@@ -1,0 +1,28 @@
+.button {
+  width: 100%;
+  display: block;
+  margin: 10px auto;
+
+  padding: 10px;
+  border-radius: 4.5px;
+
+  cursor: pointer;
+
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: $font-2xs;
+
+  transition: all 200ms ease-in-out;
+
+  &.button__default {
+    @include buttons(primary);
+  }
+
+  &.button__update {
+    @include buttons(update);
+  }
+
+  &.button__delete {
+    @include buttons(danger);
+  }
+}
