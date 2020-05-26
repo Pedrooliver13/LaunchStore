@@ -45,7 +45,7 @@ async function post(req, res, next) {
   if (user)
     return res.render("user/register", {
       user: req.body,
-      error: "Úsuario já existente",
+      error: "Usuário já existente",
     });
 
   // check if password & passwordRepeat

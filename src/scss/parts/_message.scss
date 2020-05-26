@@ -1,4 +1,12 @@
+.error {
+  background-color: red;
+  border-radius: 3.5px;
+  color: $white;
+  padding: 8px;
+}
+
 .message {
+  z-index: 1000;
   &.error {
     @include text-effect(error);
   }

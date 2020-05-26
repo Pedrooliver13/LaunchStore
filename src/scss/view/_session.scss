@@ -1,0 +1,22 @@
+.login {
+  max-width: 100%;
+  width: 550px;
+
+  .fields {
+    margin-bottom: 32px;
+  }
+
+  .login__footer ul{
+    @extend .flex-center;
+    justify-content: space-evenly;
+
+    a {
+      color: $gray;
+
+      &:hover {
+        font-weight: bold;
+        color: #000;
+      }
+    }
+  }
+}

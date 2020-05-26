@@ -9,6 +9,7 @@
 
     <form class="search" action="/products/search" method="GET">
       <input type="text" name="filter" placeholder="Buscar por produtos" {% if search.term %} value="{{search.term}}" {% endif %}>
+
       <button type="submit" class="search__button">
         <i class="material-icons">search</i>
       </button>
@@ -31,16 +32,44 @@
               Novo anúncio
             </a>
           </li>
+
           <li class="account">
-            <a href="/user/register">
+            <a href="/user/login">
               <i class="material-icons">account_circle</i>
               Acessar conta
             </a>
 
+            <ul class="submenu">
+              <li>
+                <a href="#">
+                  Configurações
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  Meus Pedidos
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  Minhas Vendas
+                </a>
+              </li>
+
+              <li>
+                <form action="/user/logout" method="POST">
+                  <button type="submit">
+                    Sair
+                  </button>
+                </form>
+              </li>
+            </ul>
           </li>
 
         </ul>
-      </nav>
+      </nav> {# /primary #}
     </div>
 
   </div>
