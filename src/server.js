@@ -17,6 +17,13 @@ nunjucks.configure("src/app/view", {
 // ? caso queira usar essa mesma api, para outro endereço um ,  npm install cors , server.use(cors());
 
 server.use(session);
+
+server.use((req, res, next) => {
+  res.locals.session = req.session;
+
+  next();
+});
+
 server.use(express.static("public"));
 server.use(express.urlencoded({ extended: true })); // aqui ele recebe o começa receber formulários;
 server.use(methodOverride("_method")); //extensão para conseguir usar PUT e DELETE;

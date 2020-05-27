@@ -39,37 +39,40 @@
               Acessar conta
             </a>
 
-            <ul class="submenu">
-              <li>
-                <a href="#">
-                  Configurações
-                </a>
-              </li>
+            {% if session.userId %}
+              <ul class="submenu">
+                <li>
+                  <a href="#">
+                    Minha conta
+                  </a>
+                </li>
 
-              <li>
-                <a href="#">
-                  Meus Pedidos
-                </a>
-              </li>
+                <li>
+                  <a href="#">
+                    Meus Pedidos
+                  </a>
+                </li>
 
-              <li>
-                <a href="#">
-                  Minhas Vendas
-                </a>
-              </li>
+                <li>
+                  <a href="#">
+                    Minhas Vendas
+                  </a>
+                </li>
 
-              <li>
-                <form action="/user/logout" method="POST">
-                  <button type="submit">
-                    Sair
-                  </button>
-                </form>
-              </li>
-            </ul>
+                <li>
+                  <form action="/user/logout" method="POST">
+                    <button type="submit">
+                      Sair
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            {% endif %}
+
           </li>
-
         </ul>
-      </nav> {# /primary #}
+      </nav>
+      {# /primary #}
     </div>
 
   </div>

@@ -5,17 +5,18 @@ const multer = require('../app/middlewares/multer');// responsável por dar um l
 const productsControllers = require('../app/controllers/produtcsControllers');
 const ProcurarControllers = require('../app/controllers/searchControllers');
 
+const { onlyUsers } = require('../app/middlewares/session'); 
 
 // Search
 routes.get('/search', ProcurarControllers.index);
 
 // Products
-routes.get("/create", productsControllers.create);
+routes.get("/create", onlyUsers ,productsControllers.create);
 routes.get("/:id", productsControllers.show);
-routes.get("/:id/edit", productsControllers.edit);
+routes.get("/:id/edit", onlyUsers ,productsControllers.edit);
 
-routes.post("/create", multer.array("photos", 6),productsControllers.post);
-routes.put("/", multer.array("photos", 6), productsControllers.put);
-routes.delete("/", productsControllers.delete);
+routes.post("/create", onlyUsers ,multer.array("photos", 6),productsControllers.post);
+routes.put("/", onlyUsers ,multer.array("photos", 6), productsControllers.put);
+routes.delete("/", onlyUsers ,productsControllers.delete);
 
 module.exports = routes;

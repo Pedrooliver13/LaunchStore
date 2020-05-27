@@ -7,6 +7,7 @@ const sessionControllers = require('../app/controllers/sessionControllers');
 const sessionValidator = require('../app/validators/session'); // ? middleware para passar as validações;
 const userValidator = require('../app/validators/user'); // ? middleware para passar as validações;
 
+
 // sessionControllers Responsável por: --> login, logout -- forgot password etc;
 
 // login/logout

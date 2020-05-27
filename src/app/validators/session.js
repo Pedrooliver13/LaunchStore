@@ -4,24 +4,33 @@ const { compare } = require("bcryptjs");
 async function login(req, res, next) {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ where: {email} });
+  const user = await User.findOne({ where: { email } });
 
-  if (!user) return res.render('session/login', {
-    user: req.body,
-    error: "Usuário não existe"
-  });
+  if (!user)
+    return res.render("session/login", {
+      user: req.body,
+      error: "Usuário não existe",
+    });
 
   const passed = await compare(password, user.password);
 
-  if (!passed) return res.render('session/login', {
-    user: req.body,
-    error: "Senha incorreta"
-  });
+  if (!passed)
+    return res.render("session/login", {
+      user: req.body,
+      error: "Senha incorreta",
+    });
 
   req.user = user;
 
   next();
 }
+
 module.exports = {
   login,
 };
+
+// * verificar se o usuário está cadastrado;
+
+// * verificar se o password bate;
+
+// * depois colocar o usuário session;
