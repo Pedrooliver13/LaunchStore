@@ -6,7 +6,6 @@ section form {
   padding: 32px 24px;
   margin: 32px auto;
 
-  box-shadow: 2px 2px 2px -4px rgba(0, 0, 0, 0.9);
   border: 2px solid #efefef;
   border-radius: 4px;
 
@@ -44,7 +43,7 @@ form .item > div:nth-child(1) {
 
   margin-bottom: 8px;
 }
-input,
+.input,
 form .item input[type="text"],
 form .item input[type="number"],
 form .item textarea,
@@ -56,6 +55,7 @@ form .item select {
   box-shadow: 2px 2px 2px -4px rgba(0, 0, 0, 0.1);
   border: 1px solid #cccc;
   border-radius: 4px;
+
   outline: none;
   resize: vertical;
 

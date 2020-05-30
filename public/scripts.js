@@ -50,6 +50,7 @@ const mask = {
   },
 };
 
+
 const validate = {
   apply(input, func) {
     validate.clearErros(input);

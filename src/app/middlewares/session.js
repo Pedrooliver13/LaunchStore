@@ -8,7 +8,7 @@ function onlyUsers(req, res, next) {
 // AGORA QUANDO ESTIVER LOGADO QUERO QUE REDIRECT PARA USERS;
 
 function isLoggedRedirectToUsers(req, res, next) {
-  if(req.session.userId) return res.rendirect('/users');
+  if(req.session.userId) return res.redirect('/user');
 
   next();
 }

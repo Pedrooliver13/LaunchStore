@@ -32,6 +32,7 @@
   @if $val == primary {
     background-color: $primary-color;
     color: $white;
+    border: none;
 
     &:hover {
       filter: brightness(105%);
@@ -50,6 +51,8 @@
   } @else if $val == update {
     background-color: $blue;
     color: $white;
+    border: none;
+
 
     &:hover {
       filter: brightness(105%);

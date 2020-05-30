@@ -1,39 +1,37 @@
 const db = require("../../config/db");
 
 module.exports = {
-  all(){
+  all() {
     return db.query(`
     SELECT * FROM products
     ORDER BY updated_at DESC
     `);
-
   },
   create(data) {
     const query = `
-        INSERT INTO products (
-           category_id,
-           user_id,
-           name,
-           description,
-           old_price,
-           price,
-           quantity,
-           status
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-        RETURNING id
-        `;
-        
+    INSERT INTO products (
+        category_id,
+        user_id,
+        name,
+        description,
+        old_price,
+        price,
+        quantity,
+        status
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING id
+`;
     data.price = data.price.replace(/\D/g, "");
 
     const values = [
       data.category_id,
-      data.user_id || 2,
+      data.user_id,
       data.name,
       data.description,
       data.old_price || data.price,
       data.price,
       data.quantity,
-      data.status || 1
+      data.status || 1,
     ];
 
     return db.query(query, values);
@@ -49,7 +47,8 @@ module.exports = {
     );
   },
   files(id) {
-    return db.query( `
+    return db.query(
+      `
       SELECT * FROM files WHERE product_id = $1
       `,
       [id]
@@ -70,7 +69,7 @@ module.exports = {
         `;
 
     data.price = data.price.replace(/\D/g, "");
-    
+
     const values = [
       data.category_id,
       data.user_id || 1,
@@ -80,42 +79,43 @@ module.exports = {
       data.price,
       data.quantity,
       data.status,
-      data.id
+      data.id,
     ];
 
     return db.query(query, values);
   },
   delete(id) {
-    return db.query(`
+    return db.query(
+      `
         DELETE FROM products
         WHERE id = $1
         `,
       [id]
     );
   },
-  search(params){
+  search(params) {
     const { filter, category } = params;
 
-    let query = '',
-        filterQuery = `WHERE`
+    let query = "",
+      filterQuery = `WHERE`;
 
-    if(category){
+    if (category) {
       filterQuery = `${filterQuery}
       products.category_id = ${category}
-      AND`
+      AND`;
     }
 
     filterQuery = `${filterQuery}
     products.name ILIKE '%${filter}%'
     OR products.description ILIKE '%${filter}%'
-    `
+    `;
 
     query = `
     SELECT products.*, categories.name AS category_name
     FROM products
     LEFT JOIN categories ON (categories.id = products.category_id)
     ${filterQuery}
-    `
+    `;
 
     return db.query(query);
     // Isso vai fazer a adaptação ficar dinâmica
@@ -124,6 +124,5 @@ module.exports = {
     // WHERE products.catergory_id ILIKE '%${filter}%'
     // AND products.name ILIKE '%${filter}%'
     // OR products.description ILIKE '%${filter}%'
-    
-  }
+  },
 };

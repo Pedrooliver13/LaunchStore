@@ -13,7 +13,6 @@ module.exports = {
       user.cep = formatCep(user.cep);
 
       return res.render("user/index", { user });
-
     } catch (error) {
       console.error(error);
 
@@ -23,26 +22,40 @@ module.exports = {
     }
   },
   async post(req, res) {
-    const userId = await User.create(req.body);
+    try {
+      // ? importante para saber o que estou enviando;
+      let { name, email, password, cpf_cnpj, cep, address } = req.body; 
 
-    req.session.userId = userId; // ? passo o userId para o session que manda para o banco de dados;
+      const userId = await User.create({
+        name,
+        email,
+        password,
+        cpf_cnpj,
+        cep,
+        address,
+      });
 
-    return res.redirect("/user");
+      req.session.userId = userId; // ? passo o userId para o session que manda para o banco de dados;
+
+      return res.redirect("/user");
+    } catch (error) {
+      console.error(error);
+    }
   },
   async put(req, res) {
     try {
       const { user } = req;
       let { name, email, cpf_cnpj, address, cep } = req.body;
 
-      cpf_cnpj = cpf_cnpj.replace(/\d/g, "");
-      cep = cep.replace(/\d/g, "");
+      cpf_cnpj = cpf_cnpj.replace(/\D/g, "");
+      cep = cep.replace(/\D/g, "");
 
       await User.update(user.id, {
         name,
         email,
         cpf_cnpj,
         cep,
-        address
+        address,
       });
 
       return res.render("user/index", {

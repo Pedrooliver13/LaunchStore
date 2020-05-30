@@ -19,14 +19,16 @@
 
           <h4>{{ product.name }}</h4>
           <p>{{ product.price }}</p>
-          
+
           {% if product.price != product.oldPrice %}
             <div class="old-price">
               {{ product.oldPrice }}
             </div>
           {% endif %}
 
-          <a class="button" href="/products/{{ product.id }}">Ver mais</a>
+          <a class="button button__update" href="/products/{{ product.id }}">
+            Ver mais
+          </a>
         </div>
       {% endfor %}
 
