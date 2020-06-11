@@ -1,4 +1,3 @@
-const User = require("../models/User");
 const crypto = require('crypto');
 
 module.exports = {
@@ -6,6 +5,7 @@ module.exports = {
     return res.render("session/login");
   },
   login(req, res) {
+    // após o validator , ele passa por aqui;
     req.session.userId = req.user.id;
 
     return res.redirect('/user');

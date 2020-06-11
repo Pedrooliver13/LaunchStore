@@ -11,7 +11,6 @@ module.exports = session({ // ? configurando a session;
   resave: false,
   saveUninitialized: false,
   cookie: {
-    
     maxAge: 30 * 24 * 60 * 60 * 1000 
   }
 });
@@ -19,7 +18,7 @@ module.exports = session({ // ? configurando a session;
 // ! --> passo o banco de dados. --> cria as seção e passa para o banco de dados;
 // ! --> passamos uma chave secreta;
 
-// *  store --> o que faz? --> cria a session --> como ? --> passando para o banco de dados;
+// * store --> o que faz? --> cria a session --> como ? --> passando para o banco de dados;
 // * secret --> o que faz? --> recebe uma chave secreta;
 // * resave --> o que faz? --> faz o resalvamento --> o quero que faça? --> salve apenas uma vez; 
 // * saveUninitialized --> o que faz? --> faz o salvamento no banco --> o quero que faça --> salve apenas quando feito o login;

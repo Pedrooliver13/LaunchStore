@@ -18,7 +18,7 @@ nunjucks.configure("src/app/view", {
 
 server.use(session);
 
-server.use((req, res, next) => {
+server.use((req, res, next) => { // variavel global;
   res.locals.session = req.session;
 
   next();

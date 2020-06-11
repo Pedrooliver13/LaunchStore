@@ -27,10 +27,9 @@ async function login(req, res, next) {
 
 async function forgot(req, res, next) {
   try {
-    // como ele é unico é muito bom para conseguir procurar o usuario;
+    // como ele(email) é unico é muito bom para conseguir procurar o usuario;
     const { email } = req.body; 
 
-    // procura dinâmicamente no banco de dados;
     const user = await User.findOne({ where: { email } }); 
 
     if (!user)
