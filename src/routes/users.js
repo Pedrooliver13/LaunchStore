@@ -16,11 +16,11 @@ routes.get('/login', isLoggedRedirectToUsers, sessionControllers.loginForm);
 routes.post('/login', sessionValidator.login, sessionControllers.login);
 routes.post('/logout', sessionControllers.logout); // como fazer o logout? --> 
 
-// // resetPassword/forgot; 
+// resetPassword/forgot; 
 routes.get('/forgot-password', sessionValidator.forgot, sessionControllers.forgotForm);
-// routes.get('/password-reset', sessionControllers.resetForm);
-routes.post('/forgot-password', sessionControllers.forgot);
-// routes.post('/password-reset', sessionControllers.reset);
+routes.get('/password-reset', sessionControllers.resetForm);
+routes.post('/forgot-password', sessionValidator.forgot, sessionControllers.forgot);
+routes.post('/password-reset',  sessionValidator.reset, sessionControllers.reset);
 
 // userControllers; responsável por: --> criação, atualização, remoção; 
 
@@ -28,7 +28,7 @@ routes.post('/forgot-password', sessionControllers.forgot);
 routes.get('/register', userControllers.registerForm);
 routes.post('/register', userValidator.post,  userControllers.post);
 
-routes.get('/', userValidator.show,userControllers.show);
+routes.get('/', userValidator.show, userControllers.show);
 routes.put('/', userValidator.update, userControllers.put);
 // routes.delete('/', userControllers.delete);
 

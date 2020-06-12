@@ -8,7 +8,8 @@
 
   .login__footer ul{
     @extend .flex-center;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    margin: 16px ;
 
     a {
       color: $gray;

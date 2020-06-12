@@ -12,7 +12,6 @@ function checkFillAllFields(body) {
       };
   }
 }
-
 async function show(req, res, next) {
   const { userId: id } = req.session;
 
@@ -27,7 +26,6 @@ async function show(req, res, next) {
 
   next();
 }
-
 async function post(req, res, next) {
   // check if all fill fields
   const fillAllfields = checkFillAllFields(req.body);
@@ -85,6 +83,7 @@ async function update(req, res, next) {
 
   next();
 }
+
 module.exports = {
   show,
   post,

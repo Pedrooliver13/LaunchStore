@@ -3,7 +3,8 @@ const pgSession = require('connect-pg-simple')(session); // ele recebe uma funç
 
 const db = require('../config/db');
 
-module.exports = session({ // ? configurando a session;
+// configurando a session;
+module.exports = session({ 
   store: new pgSession({
     pool: db 
   }),
@@ -14,6 +15,11 @@ module.exports = session({ // ? configurando a session;
     maxAge: 30 * 24 * 60 * 60 * 1000 
   }
 });
+
+
+
+
+
 // * 30 dias tem 24 horas cada hora tem 60 minutos e 60 segundos e 100 milisegundos;
 // ! --> passo o banco de dados. --> cria as seção e passa para o banco de dados;
 // ! --> passamos uma chave secreta;

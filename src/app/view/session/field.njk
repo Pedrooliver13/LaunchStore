@@ -3,25 +3,31 @@
 
   <div>
     <input 
-      class="input"
-      type="email"
-      name="email"
+      class="input" 
+      type="email" 
+      name="email" 
       placeholder="Escreva seu e-mail" 
-      value="{{ user.email }}"
+      value="{{ user.email }}" 
       onblur="validate.apply(this, 'isEmail')"
     >
   </div>
 </div>
 
-<div class="item">
-  <div>Senha</div>
+  <div class="item">
+    <div>Senha</div>
 
-  <div>
-    <input 
-      class="input"
-      type="password" 
-      name="password"
-      placeholder="Escreva sua senha" 
-    >
+    <div>
+      <input 
+        class="input" 
+        type="password" 
+        name="password" 
+        placeholder="Escreva sua sennha" 
+        value="{{ user.password }}" 
+      >
+
+    </div>
   </div>
+
+<input type="hidden" name="token" value="{{ token }}">
+
 </div>

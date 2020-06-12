@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 // pega no proprio site do mailer
-const transport = nodemailer.createTransport({
+module.exports = transport = nodemailer.createTransport({
   host: "smtp.mailtrap.io",
   port: 2525,
   auth: {
@@ -9,7 +9,3 @@ const transport = nodemailer.createTransport({
     pass: "2164074ff92e2a"
   }
 });
-
-module.exports = {
-  transport
-}
