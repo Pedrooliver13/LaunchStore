@@ -1,6 +1,9 @@
 const db = require("../../config/db");
 const { hash } = require("bcryptjs");
 
+const Products = require("./productsModels");
+const fs = require("fs");
+
 module.exports = {
   async create(data) {
     try {
@@ -66,6 +69,38 @@ module.exports = {
     });
 
     await db.query(query);
-    return 
+    return;
+  },
+  async delete(id) {
+    // pegar todos os produtos do usuario;
+    let results = await db.query("SELECT * FROM products WHERE user_id = $1", [
+      id,
+    ]);
+    const products = results.rows;
+
+    // dos produtos pegar todas as imagens;
+    const allFilesPromise = products.map((product) =>
+      Products.files(product.id)
+    );
+
+    let promiseResults = await Promise.all(allFilesPromise);
+
+    // rodar a remoção do usuário;
+    await db.query("DELETE FROM users WHERE id = $1", [id]);
+
+    // remoção das imagens da pasta public/images;
+    promiseResults.map((results) => {
+      results.rows.map((file) => {
+        try {
+          fs.unlinkSync(file.path);
+        } catch (err) {
+          console.error(err);
+
+          return res.render("user/index", {
+            error: "Algum erro aconteceu!",
+          });
+        }
+      });
+    });
   },
 };

@@ -26,10 +26,10 @@ routes.post('/password-reset',  sessionValidator.reset, sessionControllers.reset
 
 
 routes.get('/register', userControllers.registerForm);
-routes.post('/register', userValidator.post,  userControllers.post);
+routes.post('/register', userValidator.create,  userControllers.create);
 
 routes.get('/', userValidator.show, userControllers.show);
-routes.put('/', userValidator.update, userControllers.put);
+routes.put('/', userValidator.update, userControllers.update);
 // routes.delete('/', userControllers.delete);
 
 module.exports = routes; 

@@ -21,10 +21,10 @@ module.exports = {
       });
     }
   },
-  async post(req, res) {
+  async create(req, res) {
     try {
       // ? importante para saber o que estou enviando;
-      let { name, email, password, cpf_cnpj, cep, address } = req.body; 
+      let { name, email, password, cpf_cnpj, cep, address } = req.body;
 
       const userId = await User.create({
         name,
@@ -42,7 +42,7 @@ module.exports = {
       console.error(error);
     }
   },
-  async put(req, res) {
+  async update(req, res) {
     try {
       const { user } = req;
       let { name, email, cpf_cnpj, address, cep } = req.body;
@@ -68,6 +68,21 @@ module.exports = {
       return res.render("user/index", {
         error: "Algum erro aconteceu",
       });
+    }
+  },
+  async delete(req, res) {
+    try {
+      await User.delete(req.body);
+      req.session.destroy();
+
+      return res.redirect("user/login", {
+        success: "Conta deletada com sucesso",
+      });
+    } catch (err) {
+      console.error(err);
+      return res.render('user/index', {
+        error: "Algum erro aconteceu!"
+      })
     }
   },
 };

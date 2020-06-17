@@ -26,7 +26,7 @@ async function show(req, res, next) {
 
   next();
 }
-async function post(req, res, next) {
+async function create(req, res, next) {
   // check if all fill fields
   const fillAllfields = checkFillAllFields(req.body);
 
@@ -86,6 +86,6 @@ async function update(req, res, next) {
 
 module.exports = {
   show,
-  post,
+  create,
   update,
 };
