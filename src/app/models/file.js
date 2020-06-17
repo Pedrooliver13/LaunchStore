@@ -16,17 +16,19 @@ module.exports = {
   },
   async delete(id) {
     try {
-      const results = await db.query(`SELECT * FROM files WHERE id = $1`, [id]);
-      const files = results.rows[0];
+      const result = await db.query(`SELECT * FROM files WHERE id = $1`, [id]);
+      const file = result.rows[0];
 
-      fs.unlink(files.path, (err)=>{
-        if(err) throw new Error(err);
+      fs.unlinkSync(file.path);
 
-        return db.query(`DELETE FROM files WHERE id = $1`, [id]);
-      });
-
+      return db.query(
+        `
+          DELETE FROM files WHERE id = $1
+      `,
+        [id]
+      );
     } catch (error) {
-      alert('ERRO para deletar');
+      alert("ERRO para deletar");
     }
-  }
+  },
 };

@@ -72,10 +72,10 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      await User.delete(req.body);
+      await User.delete(req.body.id);
       req.session.destroy();
 
-      return res.redirect("user/login", {
+      return res.render("session/login", {
         success: "Conta deletada com sucesso",
       });
     } catch (err) {

@@ -99,7 +99,7 @@ module.exports = {
 
     return res.render("products/edit", { product, category, files });
   },
-  async put(req, res) {
+  async update(req, res) {
     const keys = Object.keys(req.body);
 
     for (let key of keys) {

@@ -30,6 +30,6 @@ routes.post('/register', userValidator.create,  userControllers.create);
 
 routes.get('/', userValidator.show, userControllers.show);
 routes.put('/', userValidator.update, userControllers.update);
-// routes.delete('/', userControllers.delete);
+routes.delete('/', userControllers.delete);
 
 module.exports = routes; 
